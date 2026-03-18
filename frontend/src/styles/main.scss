@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #ffffff;
+}
+
+
+// верстаем хэдэр 
+
+// сверху будет блок 1440 * 30 
+// цвет #5A6D57
+// по центру надпись Enjoy Free Shipping On All Orders
+// шрифт Montserrat
+// далее сам хэдэр
+// размер хэдэра 1440*110
+
+// лого состоит из 3-х частей ТЕкст слева иконка
+// снизу еще текст, я их экспортирую сам
+
+// далее по центу сылки на страницы справа 4 иконки я их тоже экспортирую
+
+
+
+// мне надо разработать онлайн магазин. проект есть в фигма
+// название проекта : market
+// стэк - Vue3, SASS, VITE, EXPRESS, DOCKER, MYSQL
+
+// давай начнем, мы последрвательно сделаем все без спешки
