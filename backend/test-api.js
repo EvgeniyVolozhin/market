@@ -1,4 +1,4 @@
-const axios = require('axios'); // сначала установите: npm install axios
+const axios = require('axios'); 
 
 async function testAPI() {
     try {

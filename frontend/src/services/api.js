@@ -1,13 +1,48 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api';
+// Функция для определения базового URL
+const getBaseURL = () => {
+    // Для продакшена (Vercel)
+    if (import.meta.env.PROD) {
+        // Используем переменную окружения или значение по умолчанию
+        return import.meta.env.VITE_API_URL || 'https://your-backend-url.com/api';
+    }
+    
+    // Для разработки (локально)
+    return 'http://localhost:5000/api';
+};
+
+const API_URL = getBaseURL();
+
+console.log('🔧 API URL:', API_URL);
+console.log('🔧 Environment:', import.meta.env.MODE);
+console.log('🔧 PROD:', import.meta.env.PROD);
 
 const api = axios.create({
     baseURL: API_URL,
     headers: {
         'Content-Type': 'application/json'
-    }
+    },
+    timeout: 10000 // 10 секунд таймаут
 });
+
+// Добавляем перехватчик для обработки ошибок
+api.interceptors.response.use(
+    response => response,
+    error => {
+        if (error.code === 'ECONNABORTED') {
+            console.error('❌ Таймаут запроса');
+        } else if (error.response) {
+            console.error(`❌ Ошибка ${error.response.status}:`, error.response.data);
+        } else if (error.request) {
+            console.error('❌ Сервер не отвечает. Проверьте подключение к бэкенду');
+            console.error('❌ URL:', API_URL);
+        } else {
+            console.error('❌ Ошибка:', error.message);
+        }
+        return Promise.reject(error);
+    }
+);
 
 export const productService = {
     // Получить все товары
